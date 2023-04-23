@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>PETA KETAHANAN DAN KERENTANAN PANGAN INDONESIA</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        #map {
+            width: 1515px;
+            height: 956px;
+        }
+        </style>
+        <title></title> 
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+</style>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Indicator (background) */
+.indicator {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Indicator Content */
+.indicator-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.indicator-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.indicator-body {padding: 2px 16px;}
+
+.indicator-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+</style>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav style="width:1515px; height:70px;" class="navbar navbar-expand-sm navbar-dark bg-dark fixed-bottom">
+            <div class="container px-0 px-sm-1">
+                <a style="float: left; margin-bottom:1px; margin-left:-50px; font-size:15px;" class="navbar-brand" href="https://tsp.sv.ugm.ac.id/">Teknologi Survei Pemetaan<br>Departemen Teknologi Kebumian</br></a>
+				 <a style="float: left; margin-bottom:1px; margin-left:100px; font-size:15px;" class="navbar-brand" >FSVA Nasional 2022 (514 Kabupaten/Kota)</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li style="float: left; margin-bottom:1px; margin-left:70px;" class="nav-item active"><button type="button" onclick>Home</button></li>
+                       
+					   <li style="margin-left:20px;" class="nav-item">
+						<!-- Trigger/Open The About -->
+						<button id="myBtn">About</button>
+						<!-- The Modal -->
+						<div id="myModal" class="modal">
+						  <!-- Modal content -->
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <span class="close">&times;</span>
+							  <h2>Aplikasi Web FSVA</h2>
+							</div>
+							<div class="modal-body">
+							  <p>Peta Ketahanan dan Kerentanan Pangan (Food Security and Vulnerability Atlas – FSVA) merupakan peta tematik yang menggambarkan visualisasi 
+							  geografis wilayah rentan terhadap kerawanan pangan. FSVA disusun dalam upaya menyediakan informasi ketahanan pangan yang akurat, komprehensif,
+							  dan tertata dengan baik untuk mendukung upaya pencegahan dan penanganan kerawanan pangan dan gizi, sehingga dapat memberikan arah dan rekomendasi
+							  kepada pembuat keputusan dalam penyusunan program, kebijakan, serta pelaksanaan intervensi di tingkat pusat dan daerah. Penyediaan informasi ini 
+							  diamanahkan dalam UU No 18/ 2012 tentang Pangan dan PP No 17/2015 tentang Ketahanan Pangan dan Gizi dimana Pemerintah dan Pemerintah Daerah sesuai
+							  dengan kewenangannya untuk membangun, menyusun, dan mengembangkan Sistem Informasi Pangan dan Gizi yang terintegrasi.</p>
+							  <p> Aplikasi Peta Ketahanan dan Kerentanan Pangan (Food Security and Vulnerability Atlas – FSVA) dan Indek Ketahanan Pangan (IKP) interaktif berbasis online.
+							  Informasi yang disediakan dalam aplikasi tersebut berupa peta yang menunjukkan status ketahanan pangan suatu wilayah berdasarkan gradasi warna merah dan hijau. </p>
+								<p>Informasi daerah rentan maupun daerah tahan juga disajikan dalam aplikasi ini. Pengguna juga dapat 
+													  mengetahui nilai masing-masing indikator maupun Indeks Ketahanan Pangan setiap wilayah. Aplikasi FSVA dan IKP tahun 2022 ini 
+													  menggunakan peta yang lebih update dari BIG. Peta yang dikeluarkan oleh BIG pada tahun 2020 mencakup 514 kabupaten/kota.</p>
+							</div>
+							<div class="modal-footer">
+							  <h3></h3>
+							</div>
+						  </div>
+						</div>
+						<script>
+						// Get the modal
+						var modal = document.getElementById("myModal");
+
+						// Get the button that opens the modal
+						var btn = document.getElementById("myBtn");
+
+						// Get the <span> element that closes the modal
+						var span = document.getElementsByClassName("close")[0];
+
+						// When the user clicks the button, open the modal 
+						btn.onclick = function() {
+						  modal.style.display = "block";
+						}
+
+						// When the user clicks on <span> (x), close the modal
+						span.onclick = function() {
+						  modal.style.display = "none";
+						}
+
+						// When the user clicks anywhere outside of the modal, close it
+						window.onclick = function(event) {
+						  if (event.target == modal) {
+							modal.style.display = "none";
+						  }
+						}
+						</script>
+						</li> 
+						
+						<section>
+                        <li style="margin-left:20px;" class="nav-item">
+						<!-- Trigger/Open The Indicator -->
+						<button id="myBtn">Indicator</button>
+
+						<!-- The Indicator -->
+						<div id="myIndicator" class="indicator">
+
+						  <!-- Indicator content -->
+						  <div class="indicator-content">
+							<div class="indicator-header">
+							  <span class="close">&times;</span>
+							  <h2>Keterangan Indicator</h2>
+							</div>
+							<div class="indicator-body">
+							   <p>Indeks Komposit Ketahanan & Kerentanan Pangan adalah indeks yang digunakan untuk pengelompokan kabupaten/kota ke dalam prioritas status ketahanan pangan, dimutakhirkan dengan menggunakan metode pembobotan yang diadopsi dari Global Food Security Index (GFSI) sebagai penyempurnaan metode yang digunakan pada atlas - atlas sebelumnya. Bobot masing - masing indikator individu di dalam analisis komposit menggunakan rata-rata penilaian bobot diditetapkan oleh para ahli. 
+							  <p>Metode ini menghasilkan skor di masing - masing kabupaten/kota selanjutnya dikelompokkan ke dalam salah satu dari 5 kelompok komposit:</p>
+							<p> 1. Sangat Rentan </p>
+							<p> 2. Rentan </p>
+							<p> 3. Agak Rentan </p>
+							<p> 4. Tahan </p>
+							<p> 5. Sangat Tahan </p>
+							</div>
+							<div class="indicator-footer">
+							  <h3></h3>
+							</div>
+						  </div>
+
+						</div>
+
+						<script>
+						// Get the indicator
+						var indicator = document.getElementById("myIndicator");
+
+						// Get the button that opens the indicator
+						var btn = document.getElementById("myBtn");
+
+						// Get the <span> element that closes the indicator
+						var span = document.getElementsByClassName("close")[0];
+
+						// When the user clicks the button, open the indicator 
+						btn.onclick = function() {
+						  indicator.style.display = "block";
+						}
+
+						// When the user clicks on <span> (x), close the indicator
+						span.onclick = function() {
+						  indicator.style.display = "none";
+						}
+
+						// When the user clicks anywhere outside of the indicator, close it
+						window.onclick = function(event) {
+						  if (event.target == indicator) {
+							indicator.style.display = "none";
+						  }
+						}
+						</script>
+						</li>
+						</section>
+                        <li style="margin-left:20px;" class="nav-item"><a class
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Contact</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Contact me</h2>
+    </div>
+    <div class="modal-body">
+      <p><b>Yuli Tri Setiyorini</b></p>
+      <p><img style="float: left; margin-top:-6px; margin-left:5px;" src="https://cdn0.iconfinder.com/data/icons/man-user-human-avatar-person-profile-business/100/01-1User_12-512.png" width="30" height="30" alt="">083815959435</p>
+	<p><img style="float: left; margin-top:-4px; margin-left:3px;" src="https://www.pngmart.com/files/15/Email-Symbol-PNG-Picture.png" width="30" height="30" alt="">		yuli.tri.setiyorini@mail.ugm.ac.id</p>
+    </div>
+    <div class="modal-footer">
+      <h3></h3>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+						</a></li>
+                    </ul>
+                </div>
+			<section>
+			<div footer>
+				<div style="float: right; margin-bottom:0px; margin-right:10px;">
+				<div class="container px-0 px-lg-1">
+				<div class="form-group">
+					<label style="color:white;" class="control-label"><label><span>CRS:</span></label></label>
+					<select id="mapstore-crsselector" class="form-control input-xs">
+					<option value="EPSG:4326">WGS 84</option>
+					<option value="EPSG:3857">EPSG:3857</option>
+					</select>
+				</div>
+				</div>
+				</div>
+			</div>
+			</section>
+			
+			<section>
+			<div footer> 
+				<div style="float: right; margin-bottom:0px; margin-right:-60px;">
+					<div id="mapstore-scalebox-container">
+					<span id="helpbadge-scaleBox" class="hidden badge"></span>
+					<div id="mapstore-scalebox">
+					<form class="form-inline">
+						<div class="form-group form-group-sm">
+						<label style="color:white;" class="control-label"><span>Scale:</span>
+						</label>
+							<select class="form-control">
+							<option value="1">1 : 9244667</option><option value="2">1 : 2311167</option>
+							<option value="3">1 : 1155583</option><option value="4">1 : 577792</option>
+							<option value="5">1 : 288896</option><option value="6">1 : 36112</option>
+							<option value="7">1 : 18056</option><option value="8">1 : 2257</option>
+							<option value="9">1 : 1128</option><option value="10">1 : 564</option>
+							</select>
+						</div>
+					</div>
+					</form>
+					</div>
+				</div>
+			</div>
+			</section>
+            </div>
+        </nav> 
+        <!-- Page Content-->
+        <section>
+		<img style="float: left; margin-top:4px; margin-left:20px;" src="https://i.pinimg.com/originals/dd/23/c9/dd23c96c8aa1e012ecb42cfe4865deaf.png" width="75" height="75" alt=""/>
+		<section>
+			<img style="float: right; margin-top:5px; margin-right:50px;" src="https://orbusvrcommunity.s3.amazonaws.com/original/1X/177551f537dfc7da210e6cdc06514384040d3148.png" width="70" height="70" alt=""/>
+			</section>
+            <div class="container px-0 px-lg-15">
+                <div class="row gx-20 gx-lg-14">
+                    <div class="col-lg-10">
+                        <h1 class="mt-1"><b>Peta Ketahanan & Kerentanan Pangan Indonesia</b></h1>
+                        <h2 style="font-size:12px;"><b>Dibuat oleh: Yuli Tri Setiyorini</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+		<section>
+		<div map>
+		<div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-19.872156929281477,95.41303844679646],[14.22444799143732,143.72321637896243]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OpenStreetMap_0');
+        map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>KAB_KOTA</strong><br />' + (feature.properties['KAB_KOTA'] !== null ? autolinker.link(feature.properties['KAB_KOTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Komposit</strong><br />' + (feature.properties['tabel_data_KOMPOSIT'] !== null ? autolinker.link(feature.properties['tabel_data_KOMPOSIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NCPR</strong><br />' + (feature.properties['tabel_data_NCPR'] !== null ? autolinker.link(feature.properties['tabel_data_NCPR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Kemiskinan(%)</strong><br />' + (feature.properties['tabel_data_KEMISKINAN(%)'] !== null ? autolinker.link(feature.properties['tabel_data_KEMISKINAN(%)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Pengeluaran_Pangan(%)</strong><br />' + (feature.properties['tabel_data_PENGELUARAN_PANGAN(%)'] !== null ? autolinker.link(feature.properties['tabel_data_PENGELUARAN_PANGAN(%)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Tanpa_Listrik(%)</strong><br />' + (feature.properties['tabel_data_TANPA_LISTRIK(%)'] !== null ? autolinker.link(feature.properties['tabel_data_TANPA_LISTRIK(%)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Tanpa_Air_Bersih(%)</strong><br />' + (feature.properties['tabel_data_TANPA_AIR_BERSIH(%)'] !== null ? autolinker.link(feature.properties['tabel_data_TANPA_AIR_BERSIH(%)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Lama_Sekolah_Perempuan_(tahun)</strong><br />' + (feature.properties['tabel_data_Lama_Sekolah_Perempuan_(tahun)'] !== null ? autolinker.link(feature.properties['tabel_data_Lama_Sekolah_Perempuan_(tahun)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Rasio_Tenaga_Kesehatan</strong><br />' + (feature.properties['tabel_data_Rasio_Tenaga_Kesehatan'] !== null ? autolinker.link(feature.properties['tabel_data_Rasio_Tenaga_Kesehatan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Angka_Harapan_Hidup_(tahun)</strong><br />' + (feature.properties['tabel_data_Angka_Harapan_Hidup_(tahun)'] !== null ? autolinker.link(feature.properties['tabel_data_Angka_Harapan_Hidup_(tahun)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Stunting_(%)</strong><br />' + (feature.properties['tabel_data_Stunting_(%)'] !== null ? autolinker.link(feature.properties['tabel_data_Stunting_(%)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>IKP</strong><br />' + (feature.properties['tabel_data_IKP'] !== null ? autolinker.link(feature.properties['tabel_data_IKP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>IKP_Ranking</strong><br />' + (feature.properties['tabel_data_IKP_Ranking'] !== null ? autolinker.link(feature.properties['tabel_data_IKP_Ranking'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>INDIKATOR</strong><br />' + (feature.properties['tabel_data_INDIKATOR'] !== null ? autolinker.link(feature.properties['tabel_data_INDIKATOR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1_0(feature) {
+            switch(String(feature.properties['tabel_data_INDIKATOR'])) {
+                case 'Sangat Rentan':
+                    return {
+                pane: 'pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Rentan':
+                    return {
+                pane: 'pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Agak Rentan':
+                    return {
+                pane: 'pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,192,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tahan':
+                    return {
+                pane: 'pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(166,217,106,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Sangat Tahan':
+                    return {
+                pane: 'pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(26,150,65,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1');
+        map.getPane('pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1').style.zIndex = 401;
+        map.getPane('pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1').style['mix-blend-mode'] = 'normal';
+        var layer_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1 = new L.geoJson(json_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1',
+            layerName: 'layer_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1',
+            pane: 'pane_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1',
+            onEachFeature: pop_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1,
+            style: style_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1_0,
+        });
+        bounds_group.addLayer(layer_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1);
+        map.addLayer(layer_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'BATAS KABUPATEN KOTA DESEMBER 2019 DUKCAPIL<br /><table><tr><td style="text-align: center;"><img src="legend/BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1_SangatRentan0.png" /></td><td>Sangat Rentan</td></tr><tr><td style="text-align: center;"><img src="legend/BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1_Rentan1.png" /></td><td>Rentan</td></tr><tr><td style="text-align: center;"><img src="legend/BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1_AgakRentan2.png" /></td><td>Agak Rentan</td></tr><tr><td style="text-align: center;"><img src="legend/BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1_Tahan3.png" /></td><td>Tahan</td></tr><tr><td style="text-align: center;"><img src="legend/BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1_SangatTahan4.png" /></td><td>Sangat Tahan</td></tr></table>': layer_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_BATASKABUPATENKOTADESEMBER2019DUKCAPIL_1,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'KAB_KOTA'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        </script>
+		</div>
+		</section>
+    </body>
+</html>
